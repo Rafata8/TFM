@@ -1,12 +1,11 @@
-proporcion=0.8
-rafa.kbm
-base=rafa.kbm@base
-contadorPeq=0
+
+vns.rafa<-function(rafa.kbm,proporcion=0.8){
 for (i in 1:50){
+  base=rafa.kbm@base
   bestBase=getBestSwap(rafa.kbm, proporcion)
   
   ##si no mejora, reducimos vecindario
-  if(bestBase==base){
+  if(all(bestBase==base)){
     proporcion=proporcion-0.2
   }
   #si mejora, volvemos a vecindario grande
@@ -19,6 +18,8 @@ for (i in 1:50){
     break
   }
 }
+  return(base)
+  }
 
 
   
