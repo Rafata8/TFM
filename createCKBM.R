@@ -12,7 +12,6 @@ createCKBM <-function(nAtrib,nDecis){
   }
     
   
-  offset<-c(1:longitud)
   
   
   df <- data.frame(x=rep(NA, 1),  # as many cols as you need
@@ -25,7 +24,9 @@ createCKBM <-function(nAtrib,nDecis){
   }
   df <-df %>% separate(x, columnas,sep=",")
   
+  
   ###ahora el offset
+  offset<-c(1:longitud)
   df<-cbind(offset = offset, df)
   
   
@@ -35,7 +36,7 @@ createCKBM <-function(nAtrib,nDecis){
   tramo=as.integer(longitud/nDecis)
   decisiones=c()
   
-  n=length(as.binary(nDecis))
+  n=length(as.binary(nDecis-1))
   for (i in 1:(nDecis-1)){
     dec=as.binary(i-1,n=n)
     decisiones=c(decisiones,rep(toString(dec),tramo))
@@ -55,6 +56,14 @@ createCKBM <-function(nAtrib,nDecis){
   df['D']=decisiones
   
   df <-df %>% separate(D, columnasD,sep=",")
+  
+  
+  #### meassure
+  med<-rep(0.3,longitud)
+  df['Meassure']<-med
+  
+  
+  df<-as.data.frame(sapply(df,as.numeric))
   
   
   return (df)
