@@ -3,6 +3,7 @@
 custom.base <-
 function (x,sambas) 
 {
+    sambas<-match(sambas,x@base)
     y <- empty.kbm(x)
     lbas <- length(x@base)
     
