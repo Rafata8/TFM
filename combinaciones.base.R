@@ -7,7 +7,7 @@ combinaciones.base<- function(base,orden=1,distanciaH=2){
   if(orden==1){
     for(it1 in 1:(lbas-1)){
       for(it2 in (it1+1):(lbas)){
-        listaBases[[j]]<-vector.swap.R(base,it1,it2)
+        listaBases[[j]]<-vector.swap(base,it1,it2)
         #dis G= Rleft +(sum(huecos entre medias+hamming -1))= (i-1)+(j-i-1)+2-1
         #listaDisG[[j]]<- (it1-1)+(it2-it1-1)+2-1
         listaDisG<-c(listaDisG,(it1-1)+(it2-it1-1)+2-1)
