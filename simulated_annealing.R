@@ -1,4 +1,4 @@
-simulated_annealing <- function(rafakbm,nIter,temperature=400){
+simulated_annealing <- function(rafakbm,nIter,temperature=50){
 
   bestbase=rafakbm@base
   bestkbm<-rafakbm
@@ -6,11 +6,12 @@ simulated_annealing <- function(rafakbm,nIter,temperature=400){
   
   
   for (i in 1:nIter){
-    temp <- temperature/nIter
+    temp <- temperature/i
+
     # cogemos combinacion al azar
     combinaciones<-combinaciones.base(bestbase)
     bases<-combinaciones$base
-    newBase<-sample(bases, 1)
+    newBase<-sample(bases, 1)[[1]]
     #y lo hacemos kbm y comparamos numero de items
     prueba<-custom.base(rafakbm, newBase)
     prueba<-swap.base.kbm(rafakbm,prueba)
@@ -24,14 +25,17 @@ simulated_annealing <- function(rafakbm,nIter,temperature=400){
     }
     #si es peor, hay probabilidad de cambiarlo
     else{
-      prob<-e^(-(items2-items)/temp)
+      prob<-exp(-(items2-items)/temp)
+
       if(prob>=runif(1, 0, 1)){
+
         bestkbm<-prueba
         items<-items2
         bestbase<-newBase
       }
     }
-
+    #print(i)
+    
   }
   
   return(bestkbm)
