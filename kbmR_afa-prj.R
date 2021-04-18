@@ -12,6 +12,8 @@ library( gmp) # bigz
 library( lattice)
 library( foreach)
 library( cluster)
+library(MASS)
+  library(parallel)
 
 #### module ####
 setwd("./defs")
@@ -42,6 +44,12 @@ source("vector.swap.R")
 source("combinaciones.base.R")
 source("getBestSwap.R")
 source("vns.rafa.R")
+source("getBestSwap2.R")
+source("vns2.rafa.R")
+source("vnsPar.rafa.R")
+source("mclapply.hack.R")
+source("getBestSParallelMC.R")
+
 setwd("..")
 
 ### models, kbmr.demo()
