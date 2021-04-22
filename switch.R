@@ -1,24 +1,67 @@
-x <- random.kbm(rl=c("D1","D2"), rcl=c(2,2), al=c("A1","A2","A3","A4","A5","A6","A7"), acl=c(3,3,2,2,2,2,2), n=8)
-indices<-x@Index
-respuestas<-x@Response
-base<-x@base
-base
-newBase<-c(1,0,2,3,4,5,6)
-
-indices[ , base]  <- indices[ , newBase]
-indices
-print(x, MODE="I")
 
 
-items <- min( 0, length( x@Response))
-items
+switch<- function(x,proporcion=0.9){
+  indices<-x@Index
+  respuestas<-x@Response
+  base<-x@base
+  bestbase<-base
+  items<-length(respuestas)
 
-logoffset=FALSE
-str.out <- "\nkbm.index mode:\n"
-for( i in 1:items) 
-  str.out <- paste( str.out, paste( i, " <",  interpretation.index( x@AttributeCardinalList, x@AttributeDomainList, x@Index[,i], roundbrackets=TRUE), ", ", 
-                                    interpretation.index( x@ResponseCardinalList, x@ResponseDomainList, offset.inv( x@WeightsResponse, x@Response[i]), roundbrackets=TRUE), ", ", 
-                                    x@Meassure[i], "| ", if (i==1) x@OffSet[i]+1 else x@OffSet[i]-x@OffSet[i-1], "\n", sep=""), sep="") 
+  
+  listaBases<-list()
+  listaItems<-c()
+  j<-1
+  b<-length(bestbase)
+  for(it1 in 1:((b)-1)){
+    
+    for (it2 in (it1+1):(b)){
+      g2= (it1-1)+(it2-it1-1)+2-1
+      
+      
+      if(g2>((b)-1)*proporcion & g2<= ((b)-1)*(proporcion+0.2)){
+        newBase<-vector.swap(bestbase,it1,it2)
+        
+        ######################hasta aqui todo como siempre
+        
+        # ahora cogemos los switches, solo los indices, añadimos la respuesta
+        # transponemos los indices
+        indices_t<-t(indices)
+        #añadimos respuesta
+        m <- cbind(indices_t, respuestas)
+        #ordenamos los indices
+        nueva<-m[ , c(newBase,length(newBase+1))]
+        nueva<-nueva[do.call(order, lapply(1:NCOL(nueva), function(i) nueva[, i])), ]
+        #calculamos los switches
+        items2<-getSwitches(nueva)
+   
+        
+        if(items2<items){
+          #lista.add("base"=base2, "items"=items2)
+          listaBases[[j]]<-newBase
+          listaItems[[j]]<-items2
+          j=j+1
+        }
 
 
-interpretation.index( x@AttributeCardinalList, x@AttributeDomainList, x@Index[,i], roundbrackets=TRUE)
+      }
+      
+      
+      #h=h+1
+    }
+    
+  }
+  ## si hay mejoras, cogemos la mejor
+  if(length(listaItems)>0){
+    bestbase<-listaBases[[which.min(listaItems)]]
+  }
+
+   
+  
+  
+  
+  return (bestbase)
+  
+
+  
+  
+}
