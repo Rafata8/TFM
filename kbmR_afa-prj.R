@@ -49,6 +49,11 @@ source("vns2.rafa.R")
 source("vnsPar.rafa.R")
 source("mclapply.hack.R")
 source("getBestSParallelMC.R")
+source("getSwitches.R")
+source("switch.R")
+source("vns.switch.R")
+source("multiSwitch.R")
+
 
 setwd("..")
 

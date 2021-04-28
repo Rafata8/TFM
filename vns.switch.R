@@ -15,14 +15,14 @@ vns.switch<-function(rafa.kbm,proporcion=0.8){
       ##cambiamos de kbm
       apoyokbm<-custom.base(bestkbm, bestBase)
       nuevokbm<-swap.base.kbm(bestkbm,apoyokbm)
-      print('mejora switches')
+      #print('mejora switches')
       
       if(length.kbm(nuevokbm)<length.kbm(bestkbm)){
         bestkbm<-nuevokbm
         base=bestBase
         proporcion=0.8
-        print(bestBase)
-        print(nuevokbm)
+        #print(bestBase)
+        #print(nuevokbm)
       }
       else{
         proporcion=proporcion-0.2
