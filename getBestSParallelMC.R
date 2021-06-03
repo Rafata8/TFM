@@ -1,6 +1,6 @@
 
 
-getBestSParallelMC<-function(rafakbm, proporcion=0.9){
+getBestSParallelMC<-function(rafakbm, proporcion=0.9,resta=0.2){
   items=length.kbm(rafakbm)
   
   bestbase=rafakbm@base
@@ -24,7 +24,7 @@ getBestSParallelMC<-function(rafakbm, proporcion=0.9){
     return (bestbase)
     
   }
-  
+  print("prueba")
   listaItems<-mclapply.hack(basesComb, function(x,b=rafakbm){
     #newBase<-basesComb[[i]]
     
@@ -32,13 +32,16 @@ getBestSParallelMC<-function(rafakbm, proporcion=0.9){
     prueba<-custom.base(b, x)
     prueba<-swap.base.kbm(b,prueba)
     length.kbm(prueba)
+
   })
+  #print(listaItems)
+  #print(listaBases)
 
   
   
   ## si hay mejoras, cogemos la mejor
   if(length(listaItems)>0){
-    bestbase<-listaBases[[which.min(listaItems)]]
+    bestbase<-basesComb[[which.min(listaItems)]]
   }
   
   

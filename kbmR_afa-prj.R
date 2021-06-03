@@ -50,9 +50,10 @@ source("vnsPar.rafa.R")
 source("mclapply.hack.R")
 source("getBestSParallelMC.R")
 source("getSwitches.R")
-source("switch.R")
+source("switch.kbm.R")
 source("vns.switch.R")
 source("multiSwitch.R")
+source("simulated_annealing.R")
 
 
 setwd("..")

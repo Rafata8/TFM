@@ -20,8 +20,15 @@ switch.kbm<- function(x,proporcion=0.9){
       
       if(g2>((b)-1)*proporcion & g2<= ((b)-1)*(proporcion+0.2)){
         newBase<-vector.swap(bestbase,it1,it2)
+        #newBase<-c(0,1,2,3,4,5,6)
         
         ######################hasta aqui todo como siempre
+        
+        
+        # transformacion en la base para cambiar las columnas que queremos
+        baseConvertida=sapply(newBase,getConvertedBase,base1=bestbase)
+        baseConvertida=c(baseConvertida,length(baseConvertida))
+        
         
         # ahora cogemos los switches, solo los indices, añadimos la respuesta
         # transponemos los indices
@@ -29,7 +36,7 @@ switch.kbm<- function(x,proporcion=0.9){
         #añadimos respuesta
         m <- cbind(indices_t, respuestas)
         #ordenamos los indices
-        nueva<-m[ , c(newBase,length(newBase+1))]
+        nueva<-m[,(baseConvertida+1)]
         nueva<-nueva[do.call(order, lapply(1:NCOL(nueva), function(i) nueva[, i])), ]
         #calculamos los switches
         items2<-getSwitches(nueva)
@@ -45,8 +52,7 @@ switch.kbm<- function(x,proporcion=0.9){
 
       }
       
-      
-      #h=h+1
+
     }
     
   }
@@ -54,15 +60,14 @@ switch.kbm<- function(x,proporcion=0.9){
   if(length(listaItems)>0){
     bestbase<-listaBases[[which.min(listaItems)]]
   }
-  print(listaItems)
 
-   
-  
-  
   
   return (bestbase)
   
 
-  
-  
+}
+
+
+getConvertedBase<-function(elemento,base1){
+  return (which(base1 == elemento)-1)
 }

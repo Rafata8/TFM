@@ -2,6 +2,7 @@
 
 getSwitches<-function(matriz){
   col=matriz[,ncol(matriz)]
+
   switches=0
   for (i in 1:length(col)){
     if(i==1){
