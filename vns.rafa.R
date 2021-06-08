@@ -1,6 +1,6 @@
-
-vns.rafa<-function(rafa.kbm,proporcion=0.8){
+vns.rafa<-function(rafa.kbm,proporcionIni=0.8, resta=0.2){
   ## inicializamos la base y la solucion
+  proporcion=proporcionIni
   base=rafa.kbm@base
   bestkbm<-rafa.kbm
   for (i in 1:50){
@@ -10,7 +10,7 @@ vns.rafa<-function(rafa.kbm,proporcion=0.8){
 
     ##si no mejora, reducimos vecindario
     if(all(bestBase==base)){
-      proporcion=proporcion-0.2
+      proporcion=proporcion-resta
     }
 
     #si mejora, actualizamos la solucion y volvemos al primer vecindario
@@ -19,7 +19,7 @@ vns.rafa<-function(rafa.kbm,proporcion=0.8){
       apoyokbm<-custom.base(bestkbm, base)
       bestkbm<-swap.base.kbm(bestkbm,apoyokbm)
       
-      proporcion=0.8
+      proporcion=proporcionIni
     }
     
     # sin no quedan más vecindarios, finalizar
