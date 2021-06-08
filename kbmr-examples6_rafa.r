@@ -106,11 +106,21 @@ print(a)
 
 ######################### pruebas medical
 inst.kbm <- df.kbm( att=10, res=1, file="./Datos/medical-v10.csv", data=TRUE, tab="csv")
-prenron.kbm <- df.kbm( att=1001, res=53, file="models/enron.csv", data=TRUE,tab="csv", CASES=270)##!!!
+inst.kbm <- df.kbm( att=20, res=2, file="./Datos/medical-v20-Rafa.csv", data=TRUE, tab="csv")
+inst.kbm <- df.kbm( att=30, res=2, file="./Datos/medical-v30.csv", data=TRUE, tab="csv")
+inst.kbm <- df.kbm( att=40, res=2, file="./Datos/medical-v40-Rafa.csv", data=TRUE, tab="csv")
+prenron.kbm <- df.kbm( att=1001, res=53, file="./models/enron.csv", data=TRUE,tab="csv", CASES=270,pam.att=27)##!!!
+
+inst.kbm <- df.kbm( att=10, res=2, file="./Datos/medical-v10-Rafa.csv", data=TRUE, tab="csv")
 
 
 readfile1 <- read.csv("./Datos/medical-v10.csv")
 readfile2 <- read.csv("./models/enron.csv")
 
+print(inst.kbm)
 
-inst.kbm <- df.kbm( df, att=3, res=2, data=FALSE)
+system.time({
+  sol<-vns.rafa(inst.kbm)
+})
+
+print(sol)

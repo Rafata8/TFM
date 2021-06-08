@@ -6,7 +6,7 @@
 
 
   rm(list=ls(all=TRUE))
-
+setwd("D:/Informatica/TFM/KBMR-dev/")
 library( gmp) # bigz
 #library( gat)
 library( lattice)
