@@ -1,5 +1,5 @@
 
-getBestSwap<-function(rafakbm, proporcion=0.9){
+getBestSwap<-function(rafakbm, proporcion=0.8, resta=0.2){
   items=length.kbm(rafakbm)
 
   bestbase=rafakbm@base
@@ -14,7 +14,7 @@ getBestSwap<-function(rafakbm, proporcion=0.9){
       g2= (it1-1)+(it2-it1-1)+2-1
 
       
-      if(g2>((b)-1)*proporcion & g2<= ((b)-1)*(proporcion+0.2)){
+      if(g2>((b)-1)*proporcion & g2<= ((b)-1)*(proporcion + resta)){
         # base2=base.swap(base,it1,it2)
         # newKBM=kbm.custom.swap(rafakbm,base2)
         # items2<-calculate.len.kbm(rafakbm)

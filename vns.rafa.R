@@ -6,7 +6,7 @@ vns.rafa<-function(rafa.kbm,proporcionIni=0.8, resta=0.2){
   for (i in 1:50){
    
    #funcion que obtiene la mejor base posible del vecindario proporcionado
-    bestBase=getBestSwap(bestkbm, proporcion)
+    bestBase=getBestSwap(bestkbm, proporcion, resta)
 
     ##si no mejora, reducimos vecindario
     if(all(bestBase==base)){
